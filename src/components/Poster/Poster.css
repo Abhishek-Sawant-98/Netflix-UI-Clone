@@ -1,0 +1,22 @@
+.row__poster {
+  display: inline-block;
+  cursor: pointer;
+  object-fit: contain;
+  position: relative;
+  height: 120px;
+  margin-right: 10px;
+  border-radius: 7px;
+  transition: transform 0.4s ease;
+  z-index: 2;
+}
+
+.row__largePoster {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  height: 250px;
+}
+
+.row__poster:hover {
+  transform: scale(1.3);
+  z-index: 3;
+}

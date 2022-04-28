@@ -1,10 +1,25 @@
 import React, { useState, useEffect } from "react";
-import api from "../utils/axios";
-import requests from "../utils/requests";
-import "../css/Banner.css";
+import api from "../../utils/axios";
+import requests from "../../utils/requests";
+import memoize from "../../utils/memoize";
+import "./Banner.css";
 
 const imgBaseUrl = "https://image.tmdb.org/t/p/original";
 
+const truncateString = (str, maxLength) => {
+  if (!str || !str.length || str === "undefined") return "Loading...";
+  return str.length > maxLength ? str.substring(0, maxLength) + "..." : str;
+};
+
+// Memoizing the below methods as they are called with the same
+// argument more than once
+const getBannerTitle = memoize(
+  (movie) => movie?.name || movie?.title || movie?.original_name
+);
+
+const getBannerOverview = memoize((movie) => movie?.overview);
+
+// Component
 const Banner = () => {
   const [bannerMovie, setBannerMovie] = useState({});
 
@@ -12,16 +27,12 @@ const Banner = () => {
     const fetchBannerMovie = async () => {
       const response = await api.get(requests.fetchNetflixOriginals);
       const movies = response.data.results;
+
       // Set a random netflix originals movie as banner
       setBannerMovie(movies[Math.floor(Math.random() * (movies.length - 1))]);
-      return response;
     };
     fetchBannerMovie();
   }, []);
-
-  const truncateString = (str, maxLength) => {
-    return str?.length > maxLength ? str?.substring(0, maxLength) + "..." : str;
-  };
 
   return (
     <section
@@ -31,12 +42,12 @@ const Banner = () => {
       }}
     >
       <div className="banner__contents">
-        <h1 className="banner__title">
-          {bannerMovie?.name ||
-            bannerMovie?.title ||
-            bannerMovie?.original_name}
+        <h1 className="banner__title" title={getBannerTitle(bannerMovie)}>
+          {truncateString(getBannerTitle(bannerMovie), 40)}
         </h1>
-        <p className="overview">{truncateString(bannerMovie.overview, 150)}</p>
+        <p className="overview" title={getBannerOverview(bannerMovie)}>
+          {truncateString(getBannerOverview(bannerMovie), 170)}
+        </p>
         <div className="banner__buttons">
           <button className="banner__button" id="play">
             <i className="bi bi-play-fill"></i>Play

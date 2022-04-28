@@ -1,0 +1,36 @@
+.menu-collapsed {
+  cursor: pointer;
+  position: absolute;
+  color: white;
+  font-size: 13px;
+  top: 15px;
+  left: 150px;
+  z-index: 2;
+  display: none;
+}
+
+.menu-expanded {
+  position: absolute;
+  left: 140px;
+  display: flex;
+  list-style-type: none;
+  color: rgb(230, 230, 230);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.menu-expanded > li {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.menu-expanded > li:hover {
+  color: rgb(184, 184, 184);
+}
+
+.bi-caret-down-fill {
+  display: inline-block;
+  color: white;
+  font-size: 12px;
+  margin-left: 5px;
+}

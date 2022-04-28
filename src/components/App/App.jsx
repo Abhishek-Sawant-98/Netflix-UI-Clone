@@ -1,9 +1,9 @@
 import React from "react";
-import "../css/App.css";
-import requests from "../utils/requests";
-import Row from "./Row";
-import Banner from "./Banner";
-import Navbar from "./Navbar";
+import "./App.css";
+import requests from "../../utils/requests";
+import Row from "../Row/Row";
+import Banner from "../Banner/Banner";
+import Navbar from "../Navbar/Navbar";
 
 const App = () => {
   return (
@@ -27,6 +27,16 @@ const App = () => {
       <Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} />
       <Row title="Romance Movies" fetchUrl={requests.fetchRomanceMovies} />
       <Row title="Documentaries" fetchUrl={requests.fetchDocumantaries} />
+      <footer>
+        &copy; 2022 Made with 💙 by &nbsp;
+        <a
+          id="footerLink"
+          href="https://github.com/Abhishek-Sawant-98"
+          target="blank"
+        >
+          <strong>Abhishek Sawant</strong>
+        </a>
+      </footer>
     </div>
   );
 };
