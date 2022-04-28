@@ -14,7 +14,13 @@ const AccountDropdown = ({ showDropdown, updateShowDropdown }) => {
       {
         <div
           className="accountDropdown  me-lg-4"
-          id={`${showDropdown ? "appear" : "disappear"}`}
+          id={`${
+            showDropdown === null
+              ? "hideDropdown"
+              : showDropdown === true
+              ? "appear"
+              : "disappear"
+          }`}
           ref={dropdownDiv}
         >
           <i className="bi bi-caret-up-fill"></i>

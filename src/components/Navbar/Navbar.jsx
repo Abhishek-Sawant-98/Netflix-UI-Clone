@@ -5,7 +5,7 @@ import NavMenu from "../NavMenu/NavMenu";
 
 const Navbar = () => {
   const [showHeaderbg, setShowHeaderbg] = useState(false);
-  const [showAccountDropdown, setShowAccountDropdown] = useState(false);
+  const [showAccountDropdown, setShowAccountDropdown] = useState(null);
 
   const menuDropdownIcon = useRef();
 
