@@ -7,8 +7,7 @@ const AccountDropdown = ({ showDropdown, updateShowDropdown }) => {
     <div
       onMouseLeave={() => updateShowDropdown(false)}
       onMouseEnter={() => {
-        updateShowDropdown(true);
-        // dropdownDiv.current.style.opacity = "1";
+        updateShowDropdown('appearWithoutTransition');
       }}
     >
       {
@@ -19,6 +18,8 @@ const AccountDropdown = ({ showDropdown, updateShowDropdown }) => {
               ? "hideDropdown"
               : showDropdown === true
               ? "appear"
+              : showDropdown === "appearWithoutTransition"
+              ? "appear-without-transition"
               : "disappear"
           }`}
           ref={dropdownDiv}
