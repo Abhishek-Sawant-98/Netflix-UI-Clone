@@ -1,11 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Poster.css";
 
 const imgBaseUrl = "https://image.tmdb.org/t/p/original";
 
-const Poster = ({ isLargePoster, movie }) => {
+const Poster = ({ posterId, getHoveredPosterId, isLargePoster, movie }) => {
+  const [hovered, setHovered] = useState(false);
   return (
     <img
+      onMouseEnter={() => {
+        getHoveredPosterId(posterId);
+        setHovered(true);
+      }}
+      onMouseLeave={() => {
+        setHovered(false);
+      }}
+      id={`${hovered ? 'hovered-poster' : ''}`}
       className={`row__poster ${isLargePoster ? "row__largePoster" : ""}`}
       src={`${imgBaseUrl}${
         isLargePoster

@@ -73,12 +73,18 @@ const Row = ({ title, fetchUrl, isLargePoster }) => {
         <div
           className="slider-row"
           ref={sliderRef}
+          onMouseLeave={() => {
+
+          }}
           onScroll={scrollCheck}
         >
           {movies.map((movie) => (
             <Poster
               key={movie.id}
               posterId={movie.id}
+              getHoveredPosterId={(hoveredPosterId) => {
+
+              }}
               sliderRow={sliderRef}
               isLargePoster={isLargePoster}
               movie={movie}
