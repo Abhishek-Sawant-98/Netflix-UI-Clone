@@ -30,10 +30,6 @@
   z-index: 1;
 }
 
-.slider-row:hover {
-  /* filter: brightness(30%); */
-}
-
 .slider-row::-webkit-scrollbar {
   display: none;
 }
@@ -57,4 +53,3 @@
 .bi-chevron-right {
   right: 10px;
 }
-

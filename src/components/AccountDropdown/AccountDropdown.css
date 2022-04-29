@@ -1,4 +1,4 @@
-.accountDropdown {
+.account-dropdown {
   color: white;
   background-color: rgba(0, 0, 0, 0.9);
   font-size: 13px;
@@ -53,17 +53,17 @@
   }
 }
 
-.accountDropdown > div {
+.account-dropdown > div {
   display: flex;
   padding: 15px;
   align-items: center;
 }
 
-.accountDropdown > div > * {
+.account-dropdown > div > * {
   display: inline-block;
 }
 
-.accountDropdown > div:hover {
+.account-dropdown > div:hover {
   text-decoration: underline;
 }
 

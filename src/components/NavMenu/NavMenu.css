@@ -9,10 +9,40 @@
   display: none;
 }
 
+.menu-dropdown {
+  position: absolute;
+  left: 40px;
+  top: 70px;
+  width: 250px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.95);
+  color: rgb(185, 185, 185);
+  border-width: 2px 1px 1px 1px;
+  border-style: solid;
+  border-color: white #3d3d3d #3d3d3d #3d3d3d;
+  border-radius: 2px;
+  z-index: 2;
+}
+
+.menu-dropdown > div {
+  padding: 15px;
+}
+
+.menu-dropdown > .bi {
+  margin-left: -25px;
+  margin-top: 2px;
+}
+
+.menu-dropdown > div:hover {
+  background-color: rgba(179, 179, 179, 0.082);
+  transition: background-color 0.5s;
+}
+
 .menu-expanded {
   position: absolute;
   left: 140px;
-  display: flex;
   list-style-type: none;
   color: rgb(230, 230, 230);
   font-weight: 500;
@@ -26,6 +56,19 @@
 
 .menu-expanded > li:hover {
   color: rgb(184, 184, 184);
+}
+
+.home-item {
+  color: white;
+  font-weight: bold;
+}
+
+.home-item:hover {
+  cursor: auto;
+}
+
+.menu-expanded > .home-item:hover {
+  color: white;
 }
 
 .bi-caret-down-fill {
