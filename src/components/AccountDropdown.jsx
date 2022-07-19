@@ -1,5 +1,4 @@
 import React from "react";
-import "./AccountDropdown.css";
 
 const AccountDropdown = ({ showDropdown, updateShowDropdown }) => {
   return (

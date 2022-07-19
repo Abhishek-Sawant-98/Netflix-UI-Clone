@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import api from "../../utils/axios";
-import Poster from "../Poster/Poster";
-import "./Row.css";
+import { useState, useEffect, useRef } from "react";
+import api from "../utils/axios";
+import Poster from "./Poster";
 
 const Row = ({ title, fetchUrl, isLargePoster }) => {
   const [movies, setMovies] = useState([]);
@@ -36,6 +35,12 @@ const Row = ({ title, fetchUrl, isLargePoster }) => {
     }, 1);
   };
 
+  const slideToLeft = () => shiftSlider(-5);
+  const slideToRight = () => shiftSlider(5);
+
+  const showSlider = () => setSliderVisibility(true);
+  const hideSlider = () => setSliderVisibility(false);
+
   const scrollCheck = () => {
     setScrollX(sliderRef.current.scrollLeft);
     updateScrollEnd();
@@ -61,30 +66,30 @@ const Row = ({ title, fetchUrl, isLargePoster }) => {
       </h2>
       <div
         className="row__posters"
-        onMouseEnter={() => setSliderVisibility(true)}
-        onMouseLeave={() => setSliderVisibility(false)}
+        onMouseEnter={showSlider}
+        onMouseLeave={hideSlider}
       >
         {scrollX !== 0 && sliderVisibility && (
           <i
             className="bi bi-chevron-left movie-sliders"
-            onClick={() => shiftSlider(-5)}
+            onClick={slideToLeft}
           ></i>
         )}
         <div
           className="slider-row"
           ref={sliderRef}
-          onMouseLeave={() => {
-
+          // Event delegation
+          onClick={(e) => {
+            const posterId = e.target?.dataset?.poster;
+            if (!posterId) return;
+            // Otherwise display the trailer of posterId
           }}
           onScroll={scrollCheck}
         >
           {movies.map((movie) => (
             <Poster
-              key={movie.id}
-              posterId={movie.id}
-              getHoveredPosterId={(hoveredPosterId) => {
-
-              }}
+              key={movie?.id}
+              posterId={movie?.id}
               sliderRow={sliderRef}
               isLargePoster={isLargePoster}
               movie={movie}
@@ -94,7 +99,7 @@ const Row = ({ title, fetchUrl, isLargePoster }) => {
         {!scrollEnd && sliderVisibility && (
           <i
             className="bi bi-chevron-right movie-sliders"
-            onClick={() => shiftSlider(5)}
+            onClick={slideToRight}
           ></i>
         )}
       </div>

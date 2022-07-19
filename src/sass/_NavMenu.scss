@@ -7,8 +7,14 @@
   left: 150px;
   z-index: 2;
   display: none;
-}
 
+  .bi-caret-down-fill {
+    display: inline-block;
+    color: white;
+    font-size: 12px;
+    margin-left: 5px;
+  }
+}
 .menu-dropdown {
   position: absolute;
   left: 40px;
@@ -24,22 +30,18 @@
   border-color: white #3d3d3d #3d3d3d #3d3d3d;
   border-radius: 2px;
   z-index: 2;
+  div {
+    padding: 15px;
+    &:hover {
+      background-color: rgba(179, 179, 179, 0.082);
+      transition: background-color 0.5s;
+    }
+  }
+  .bi {
+    margin-left: -25px;
+    margin-top: 2px;
+  }
 }
-
-.menu-dropdown > div {
-  padding: 15px;
-}
-
-.menu-dropdown > .bi {
-  margin-left: -25px;
-  margin-top: 2px;
-}
-
-.menu-dropdown > div:hover {
-  background-color: rgba(179, 179, 179, 0.082);
-  transition: background-color 0.5s;
-}
-
 .menu-expanded {
   position: absolute;
   left: 140px;
@@ -47,33 +49,18 @@
   color: rgb(230, 230, 230);
   font-weight: 500;
   font-size: 14px;
-}
-
-.menu-expanded > li {
-  margin-right: 20px;
-  cursor: pointer;
-}
-
-.menu-expanded > li:hover {
-  color: rgb(184, 184, 184);
-}
-
-.home-item {
-  color: white;
-  font-weight: bold;
-}
-
-.home-item:hover {
-  cursor: auto;
-}
-
-.menu-expanded > .home-item:hover {
-  color: white;
-}
-
-.bi-caret-down-fill {
-  display: inline-block;
-  color: white;
-  font-size: 12px;
-  margin-left: 5px;
+  .home-item {
+    color: white;
+    font-weight: bold;
+    &:hover {
+      cursor: auto;
+    }
+  }
+  li {
+    margin-right: 20px;
+    cursor: pointer;
+    &:hover {
+      color: rgb(184, 184, 184);
+    }
+  }
 }

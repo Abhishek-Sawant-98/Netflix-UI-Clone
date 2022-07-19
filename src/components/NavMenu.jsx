@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import "./NavMenu.css";
+import { useState } from "react";
 
 const NavMenu = () => {
   const [showMenu, setShowMenu] = useState(null);

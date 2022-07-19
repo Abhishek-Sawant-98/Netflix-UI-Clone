@@ -1,13 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
-import "./Navbar.css";
-import AccountDropdown from "../AccountDropdown/AccountDropdown";
-import NavMenu from "../NavMenu/NavMenu";
+import { useEffect, useState, useRef } from "react";
+import { NETFLIX_LOGO, USER_AVATAR } from "../utils/appUtils";
+import AccountDropdown from "./AccountDropdown";
+import NavMenu from "./NavMenu";
 
 const Navbar = () => {
   const [showHeaderbg, setShowHeaderbg] = useState(false);
   const [showAccountDropdown, setShowAccountDropdown] = useState(null);
 
   const menuDropdownIcon = useRef();
+
+  const displayAccountDropdown = () => setShowAccountDropdown(true);
+  const hideAccountDropdown = () => setShowAccountDropdown(false);
+  const updateDropdownVisibility = (dropdownVisibility) =>
+    setShowAccountDropdown(dropdownVisibility);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -31,29 +36,20 @@ const Navbar = () => {
         backgroundColor: `${showHeaderbg ? "#141417" : "transparent"}`,
       }}
     >
-      <img
-        id="netflix-logo"
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/799px-Netflix_2015_logo.svg.png?20190206123158"
-        alt="netflix-logo"
-      />
+      <img id="netflix-logo" src={NETFLIX_LOGO} alt="netflix-logo" />
       {/* Navbar Menu */}
       <NavMenu />
 
       <span className="right-side-icons me-lg-4">
-        <i className="bi bi-search  me-lg-4"></i>
-        <span className="kids d-none d-md-inline-block  me-lg-4">Children</span>
-        <i className="bi bi-bell-fill  me-lg-4"></i>
+        <span className="kids d-none d-md-inline-block me-lg-4">Children</span>
+        <i className="bi bi-bell-fill me-1 me-sm-2 me-lg-4"></i>
         <img
           className="me-lg-1"
           id="user-avatar"
-          src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png?20201013161117"
+          src={USER_AVATAR}
           alt="user-avatar"
-          onMouseEnter={() => {
-            setShowAccountDropdown(true);
-          }}
-          onMouseLeave={() => {
-            setShowAccountDropdown(false);
-          }}
+          onMouseEnter={displayAccountDropdown}
+          onMouseLeave={hideAccountDropdown}
         />
         <i
           className="bi bi-caret-down-fill d-none d-lg-inline-block"
@@ -64,9 +60,7 @@ const Navbar = () => {
       {/* Account Dropdown */}
       <AccountDropdown
         showDropdown={showAccountDropdown}
-        updateShowDropdown={(dropdownVisibility) =>
-          setShowAccountDropdown(dropdownVisibility)
-        }
+        updateShowDropdown={updateDropdownVisibility}
       />
     </div>
   );

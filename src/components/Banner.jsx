@@ -1,23 +1,12 @@
-import React, { useState, useEffect } from "react";
-import api from "../../utils/axios";
-import requests from "../../utils/requests";
-import memoize from "../../utils/memoize";
-import "./Banner.css";
-
-const imgBaseUrl = "https://image.tmdb.org/t/p/original";
-
-const truncateString = (str, maxLength) => {
-  if (!str || !str.length || str === "undefined") return "Loading...";
-  return str.length > maxLength ? str.substring(0, maxLength) + "..." : str;
-};
-
-// Memoizing the below methods as they are called with the same
-// argument more than once
-const getBannerTitle = memoize(
-  (movie) => movie?.name || movie?.title || movie?.original_name
-);
-
-const getBannerOverview = memoize((movie) => movie?.overview);
+import { useState, useEffect } from "react";
+import {
+  getBannerOverview,
+  getBannerTitle,
+  IMG_BASE_URL,
+  truncateString,
+} from "../utils/appUtils";
+import api from "../utils/axios";
+import requests from "../utils/requests";
 
 // Component
 const Banner = () => {
@@ -38,15 +27,17 @@ const Banner = () => {
     <section
       className="banner"
       style={{
-        backgroundImage: `url(${imgBaseUrl}${bannerMovie?.backdrop_path})`,
+        backgroundImage: `url(${IMG_BASE_URL}/${
+          bannerMovie?.backdrop_path || ""
+        })`,
       }}
     >
       <div className="banner__contents">
         <h1 className="banner__title" title={getBannerTitle(bannerMovie)}>
-          {truncateString(getBannerTitle(bannerMovie), 40)}
+          {truncateString(getBannerTitle(bannerMovie), 25)}
         </h1>
         <p className="overview" title={getBannerOverview(bannerMovie)}>
-          {truncateString(getBannerOverview(bannerMovie), 170)}
+          {truncateString(getBannerOverview(bannerMovie), 130)}
         </p>
         <div className="banner__buttons">
           <button className="banner__button" id="play">
