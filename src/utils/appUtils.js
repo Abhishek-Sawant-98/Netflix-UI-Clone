@@ -16,6 +16,24 @@ export const memoize = (func) => {
   };
 };
 
+// Convert a normal function to a 'debounced' function
+export const throttle = (func, interval = 500) => {
+  let inThrottle;
+  return function (...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      // To PREVENT control to reach inside this if block
+      // for 'interval' ms
+      inThrottle = true;
+      setTimeout(() => {
+        // To ALLOW control to reach inside this if block
+        // after 'interval' ms
+        inThrottle = false;
+      }, interval);
+    }
+  };
+};
+
 export const truncateString = (str, maxLength) => {
   if (!str || !str.length || str === "undefined") return "Loading...";
   return str.length > maxLength ? str.substring(0, maxLength) + "..." : str;

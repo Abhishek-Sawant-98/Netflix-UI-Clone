@@ -1,5 +1,5 @@
 .banner {
-  height: clamp(350px, 50vw, 600px);
+  height: clamp(350px, 50vw, 670px);
   background-position: top;
   background-size: cover;
   color: #fff;
@@ -12,7 +12,7 @@
 
     .banner__title {
       cursor: auto;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
       font-size: clamp(33px, 6vw, 80px);
       letter-spacing: 1px;
       font-weight: 500;

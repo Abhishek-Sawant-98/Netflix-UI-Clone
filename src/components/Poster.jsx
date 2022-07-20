@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { IMG_BASE_URL } from "../utils/appUtils";
 
-const Poster = ({ posterId, isLargePoster, movie }) => {
+const Poster = ({ posterId, isLargePoster, movie, onImgError }) => {
   const [fetched, setFetched] = useState(false);
   const imgRef = useRef();
   const posterClassName = `row__poster ${
@@ -18,9 +18,10 @@ const Poster = ({ posterId, isLargePoster, movie }) => {
   return (
     <>
       {!fetched && (
-        <div className={`posterClassName`}>
-          <p className="bg-light w-100 h-100">image</p>
-        </div>
+        <div
+          className={`${posterClassName} bg-secondary bg-opacity-50 placeholder-wave`}
+          style={{ minWidth: isLargePoster ? "170px" : "240px" }}
+        ></div>
       )}
       <img
         data-poster={posterId}
@@ -29,16 +30,11 @@ const Poster = ({ posterId, isLargePoster, movie }) => {
         }`}
         src={`${IMG_BASE_URL}${
           isLargePoster
-            ? movie?.poster_path || movie?.backdrop_path
-            : movie?.backdrop_path || movie?.poster_path
+            ? movie?.poster_path || movie?.backdrop_path || ""
+            : movie?.backdrop_path || movie?.poster_path || ""
         }`}
         ref={imgRef}
-        onLoad={(e) => {
-          console.log("img loaded");
-        }}
-        onError={(e) => {
-          console.log("img error");
-        }}
+        onError={onImgError}
         alt={""}
       />
     </>

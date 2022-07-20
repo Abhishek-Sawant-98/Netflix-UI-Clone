@@ -36,7 +36,12 @@ const Navbar = () => {
         backgroundColor: `${showHeaderbg ? "#141417" : "transparent"}`,
       }}
     >
-      <img id="netflix-logo" src={NETFLIX_LOGO} alt="netflix-logo" />
+      <img
+        id="netflix-logo"
+        src={NETFLIX_LOGO}
+        alt="netflix-logo"
+        onClick={() => window.location.reload()}
+      />
       {/* Navbar Menu */}
       <NavMenu />
 

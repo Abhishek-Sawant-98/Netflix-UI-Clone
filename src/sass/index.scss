@@ -1,4 +1,3 @@
-
 @import "App";
 @import "AccountDropdown";
 @import "Banner";
@@ -8,5 +7,6 @@
 @import "Row";
 
 * {
-    margin: 0;
+  margin: 0;
+  scrollbar-width: none;
 }
