@@ -48,7 +48,7 @@ export const getBannerTitle = memoize(
 export const isTrailerNotAvailable = (videoId, movieName) => {
   return (
     !videoId &&
-    !/^(Sex Education|The Naked Director|Squid Game|All of Us Are Dead|Boo, Bitch|Man Vs Bee|Money Heist: Korea - Joint Economic Area)$/.test(
+    !/^(Sex Education|The Naked Director|Squid Game|All of Us Are Dead|Boo, Bitch|Man Vs Bee|Money Heist: Korea - Joint Economic Area|The Umbrella Academy)$/.test(
       movieName
     )
   );
@@ -71,6 +71,8 @@ export const getUpdatedVideoId = (videoId, movieName) => {
     ? "YQ1vN_91KO0"
     : movieName === "Money Heist: Korea - Joint Economic Area"
     ? "Uafg97czxeQ"
+    : movieName === "The Umbrella Academy"
+    ? "0DAmWHxeoKw"
     : movieName === "The Naked Director"
     ? "bUzxiWLH60I"
     : videoId;
