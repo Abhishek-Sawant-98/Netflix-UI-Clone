@@ -12,7 +12,7 @@ const TrailerModal = () => {
   const dispatch = useDispatch();
 
   const opts = {
-    height: "350",
+    height: "400",
     width: "100%",
     playerVars: {
       autoplay: 1,
@@ -36,7 +36,7 @@ const TrailerModal = () => {
         <div className="modal-content bg-dark">
           <div className="modal-header border-0">
             <h5 className="modal-title text-light ms-2">
-              {movieName + " - Trailer"}
+              {movieName + " (Trailer)"}
             </h5>
             <button
               className="btn-close bg-light rounded-circle border-danger"
