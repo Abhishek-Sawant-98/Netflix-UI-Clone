@@ -48,7 +48,7 @@ export const getBannerTitle = memoize(
 export const isTrailerNotAvailable = (videoId, movieName) => {
   return (
     !videoId &&
-    !/^(Sex Education|The Naked Director|Squid Game|All of Us Are Dead|Boo, Bitch|Man Vs Bee|Money Heist: Korea - Joint Economic Area|The Umbrella Academy)$/.test(
+    !/^(Sex Education|Money Heist|The Naked Director|Squid Game|All of Us Are Dead|Boo, Bitch|Man Vs Bee|Money Heist: Korea - Joint Economic Area|The Umbrella Academy)$/.test(
       movieName
     )
   );
@@ -59,6 +59,8 @@ export const getUpdatedVideoId = (videoId, movieName) => {
     ? "isOGD_7hNIY"
     : movieName === "Lucifer"
     ? "ueMwVGBwqRo"
+    : movieName === "Money Heist"
+    ? "_InqQJRqGW4"
     : movieName === "Sex Education"
     ? "zmgYlYw7Uwk"
     : movieName === "Squid Game"
