@@ -1,13 +1,14 @@
-import { useEffect, useRef } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IMG_BASE_URL } from "../utils/appUtils";
 
-const Poster = ({ posterId, isLargePoster, movie, onImgError }) => {
+const Poster = ({ isLargePoster, movie, onImgError }) => {
   const [fetched, setFetched] = useState(false);
   const imgRef = useRef();
   const posterClassName = `row__poster ${
     isLargePoster ? "row__largePoster" : ""
   }`;
+  const { name, original_name, title, original_title } = movie;
+  const movieName = name || original_name || title || original_title || "";
 
   useEffect(() => {
     if (imgRef.current?.complete) {
@@ -19,12 +20,15 @@ const Poster = ({ posterId, isLargePoster, movie, onImgError }) => {
     <>
       {!fetched && (
         <div
+          title={`${movieName}\n(Click To Watch Trailer)`}
+          data-movie-name={movieName}
           className={`${posterClassName} bg-secondary bg-opacity-50 placeholder-wave`}
           style={{ minWidth: isLargePoster ? "170px" : "240px" }}
         ></div>
       )}
       <img
-        data-poster={posterId}
+        title={`${movieName}\n(Click To Watch Trailer)`}
+        data-movie-name={movieName}
         className={`d-inline-block ${posterClassName} ${
           fetched ? "visible" : "hidden"
         }`}

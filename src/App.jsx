@@ -1,8 +1,9 @@
-import React from "react";
-import requests from "./utils/requests";
 import Row from "./components/Row";
 import Banner from "./components/Banner";
 import Navbar from "./components/Navbar";
+import AppAlert from "./components/AppAlert";
+import TrailerModal from "./components/TrailerModal";
+import requests from "./utils/requests";
 
 const App = () => {
   return (
@@ -14,18 +15,18 @@ const App = () => {
       <Banner />
 
       {/* Rows */}
-      <Row
-        title="NETFLIX ORIGINALS"
-        fetchUrl={requests.fetchNetflixOriginals}
-        isLargePoster
-      />
-      <Row title="Trending Now" fetchUrl={requests.fetchTrending} />
-      <Row title="Top Rated" fetchUrl={requests.fetchTopRated} />
-      <Row title="Action Movies" fetchUrl={requests.fetchActionMovies} />
-      <Row title="Comedy Movies" fetchUrl={requests.fetchComedyMovies} />
-      <Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} />
-      <Row title="Romance Movies" fetchUrl={requests.fetchRomanceMovies} />
-      <Row title="Documentaries" fetchUrl={requests.fetchDocumantaries} />
+      <section>
+        {requests.map((req, i) => (
+          <Row
+            key={`movieRow${i}`}
+            title={req.title}
+            fetchUrl={req.url}
+            isLargePoster={req.isLargePoster}
+          />
+        ))}
+      </section>
+      <AppAlert />
+      <TrailerModal />
       <footer>
         &copy; 2022 Made with 💙 by &nbsp;
         <a

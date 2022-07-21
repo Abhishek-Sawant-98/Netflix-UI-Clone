@@ -45,6 +45,35 @@ export const getBannerTitle = memoize(
   (movie) => movie?.name || movie?.title || movie?.original_name
 );
 
+export const isTrailerNotAvailable = (videoId, movieName) => {
+  return (
+    !videoId &&
+    !/^(Sex Education|The Naked Director|Squid Game|All of Us Are Dead|Boo, Bitch|Man Vs Bee)$/.test(
+      movieName
+    )
+  );
+};
+
+export const getUpdatedVideoId = (videoId, movieName) => {
+  return movieName === "Parasite"
+    ? "isOGD_7hNIY"
+    : movieName === "Lucifer"
+    ? "ueMwVGBwqRo"
+    : movieName === "Sex Education"
+    ? "zmgYlYw7Uwk"
+    : movieName === "Squid Game"
+    ? "oqxAJKy0ii4"
+    : movieName === "All of Us Are Dead"
+    ? "IN5TD4VRcSM"
+    : movieName === "Boo, Bitch"
+    ? "1hWE2ZJxb4c"
+    : movieName === "Man Vs Bee"
+    ? "YQ1vN_91KO0"
+    : movieName === "The Naked Director"
+    ? "bUzxiWLH60I"
+    : videoId;
+};
+
 export const getBannerOverview = memoize((movie) => movie?.overview);
 
 export const IMG_BASE_URL = "https://image.tmdb.org/t/p/original";

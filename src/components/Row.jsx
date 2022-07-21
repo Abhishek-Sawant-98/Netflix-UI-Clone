@@ -1,9 +1,20 @@
+import movieTrailer from "movie-trailer";
 import { useState, useEffect, useRef } from "react";
-import { throttle } from "../utils/appUtils";
+import {
+  getUpdatedVideoId,
+  isTrailerNotAvailable,
+  throttle,
+} from "../utils/appUtils";
 import api from "../utils/axios";
 import Poster from "./Poster";
+import { useDispatch } from "react-redux";
+import { setMovieName, setTrailerId } from "../redux/slices/AppSlice";
+import ModalButton from "./ModalButton";
 
 const Row = ({ title, fetchUrl, isLargePoster }) => {
+  const dispatch = useDispatch();
+  const btnShowAlert = useRef();
+  const btnShowTrailer = useRef();
   const [movies, setMovies] = useState([]);
   const [sliderVisibility, setSliderVisibility] = useState(false);
   const [scrollX, setScrollX] = useState(0);
@@ -92,21 +103,32 @@ const Row = ({ title, fetchUrl, isLargePoster }) => {
           ></i>
         )}
         <div
+          // Event Delegation
+          onClick={async (e) => {
+            try {
+              const movie = e.target?.dataset?.movieName;
+              if (!movie) return;
+              let videoId = await movieTrailer(movie, {
+                id: true,
+              });
+              if (isTrailerNotAvailable(videoId, movie)) {
+                return btnShowAlert?.current?.click();
+              }
+              videoId = getUpdatedVideoId(videoId, movie);
+              dispatch(setTrailerId(videoId));
+              dispatch(setMovieName(movie));
+              btnShowTrailer?.current?.click();
+            } catch (error) {
+              console.log(error);
+            }
+          }}
           className="slider-row"
           ref={sliderRef}
-          // Event delegation
-          onClick={(e) => {
-            const posterId = e.target?.dataset?.poster;
-            if (!posterId) return;
-            // Otherwise display the trailer of posterId
-            alert(posterId);
-          }}
           onScroll={scrollCheck}
         >
           {movies.map((movie) => (
             <Poster
               key={movie?.id}
-              posterId={movie?.id}
               sliderRow={sliderRef}
               isLargePoster={isLargePoster}
               movie={movie}
@@ -121,6 +143,8 @@ const Row = ({ title, fetchUrl, isLargePoster }) => {
           ></i>
         )}
       </div>
+      <ModalButton targetModal={"trailerModal"} ref={btnShowTrailer} />
+      <ModalButton targetModal={"alertModal"} ref={btnShowAlert} />
     </section>
   );
 };
