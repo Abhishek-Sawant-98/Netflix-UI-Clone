@@ -35,7 +35,9 @@ const TrailerModal = () => {
       <div className="modal-dialog modal-xl modal-dialog-centered">
         <div className="modal-content bg-dark">
           <div className="modal-header border-0">
-            <h5 className="modal-title text-light ms-2">{movieName}</h5>
+            <h5 className="modal-title text-light ms-2">
+              {movieName + " - Trailer"}
+            </h5>
             <button
               className="btn-close bg-light rounded-circle border-danger"
               data-bs-dismiss="modal"
@@ -44,15 +46,6 @@ const TrailerModal = () => {
           </div>
           <div className="modal-body">
             {trailerId && <YouTube videoId={trailerId} opts={opts} />}
-          </div>
-          <div className="modal-footer border-0">
-            <button
-              className="btn btn-outline-info"
-              onClick={resetTrailerData}
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
           </div>
         </div>
       </div>
