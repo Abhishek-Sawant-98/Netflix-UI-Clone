@@ -11,7 +11,7 @@ import {
 import api from "../utils/axios";
 import requests from "../utils/requests";
 import { useDispatch } from "react-redux";
-import { setMovieName, setTrailerId } from "../redux/slices/AppSlice";
+import { setMovieName, setTrailerId } from "../store/slices/AppSlice";
 import ModalButton from "./ModalButton";
 
 const Banner = () => {

@@ -11,7 +11,7 @@ const Poster = ({ isLargePoster, movie, onImgError }) => {
   const movieName = name || original_name || title || original_title || "";
 
   useEffect(() => {
-    if (imgRef.current?.complete) {
+    if (imgRef?.current?.complete) {
       setFetched(true);
     }
   });

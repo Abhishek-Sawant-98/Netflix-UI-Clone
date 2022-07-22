@@ -16,7 +16,7 @@ export const memoize = (func) => {
   };
 };
 
-// Convert a normal function to a 'debounced' function
+// Convert a normal function to a 'throttled' function
 export const throttle = (func, interval = 500) => {
   let inThrottle;
   return function (...args) {

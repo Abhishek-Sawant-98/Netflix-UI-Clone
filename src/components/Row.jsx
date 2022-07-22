@@ -8,7 +8,7 @@ import {
 import api from "../utils/axios";
 import Poster from "./Poster";
 import { useDispatch } from "react-redux";
-import { setMovieName, setTrailerId } from "../redux/slices/AppSlice";
+import { setMovieName, setTrailerId } from "../store/slices/AppSlice";
 import ModalButton from "./ModalButton";
 
 const Row = ({ title, fetchUrl, isLargePoster }) => {
@@ -70,15 +70,11 @@ const Row = ({ title, fetchUrl, isLargePoster }) => {
     fetchMovies();
   }, [fetchUrl]);
 
-  const reloadPage = throttle(() => {
-    window.location.reload();
-  }, 1000);
-
   const onImgError = (e) => {
+    e.target.onerror = null;
     e.target.src = `https://via.placeholder.com/${
       e.target.height === 250 ? "100x250" : "220x140"
     }`;
-    reloadPage();
   };
 
   return (

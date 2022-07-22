@@ -5,7 +5,7 @@ import {
   selectAppState,
   setMovieName,
   setTrailerId,
-} from "../redux/slices/AppSlice";
+} from "../store/slices/AppSlice";
 
 const TrailerModal = () => {
   const { movieName, trailerId } = useSelector(selectAppState);
