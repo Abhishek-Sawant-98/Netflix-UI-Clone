@@ -1,6 +1,6 @@
 # Netflix UI Clone (React)
 
-This is a very basic UI clone of the NETFLIX web app using React and [The MovieDB API](https://www.themoviedb.org/documentation/api). 
+This is a very basic UI clone of the NETFLIX web app using `React` and [The MovieDB API](https://www.themoviedb.org/documentation/api). 
 
 > Deployed App 👉 <https://abhishek-netflix-clone.netlify.app/> 🚀
 
@@ -12,12 +12,12 @@ https://user-images.githubusercontent.com/66935206/180422680-f1112889-67e0-459a-
 
 ## Tools Used
 
-- Axios
-- React 
-- Redux Toolkit
-- Sass 
-- Bootstrap5
-- Movie-Trailer 
+- [Axios](https://www.npmjs.com/package/axios)
+- [React](https://reactjs.org/) 
+- [Redux Toolkit](https://redux.js.org/tutorials/quick-start)
+- [Sass](https://sass-lang.com/) 
+- [Bootstrap5](https://getbootstrap.com/)
+- [Movie-Trailer](https://www.npmjs.com/package/movie-trailer) 
 
 ## Steps to Run Project Locally 
 
