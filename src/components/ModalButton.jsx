@@ -5,6 +5,7 @@ const ModalButton = forwardRef(({ targetModal }, ref) => {
     <button
       ref={ref}
       className="visually-hidden"
+      aria-label="modalButton"
       data-bs-toggle="modal"
       data-bs-target={`#${targetModal}`}
     ></button>
