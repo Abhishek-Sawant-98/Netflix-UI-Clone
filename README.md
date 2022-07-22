@@ -2,15 +2,15 @@
 
 This is a very basic UI clone of the NETFLIX web app using React and [The MovieDB API](https://www.themoviedb.org/documentation/api). 
 
-> Deployed App 👉 <https://abhishek-netflix-clone.netlify.app/>
+> Deployed App 👉 <https://abhishek-netflix-clone.netlify.app/> 🚀
 
 🔥 This is a **PWA** ([`Progressive Web App`](https://medium.com/swlh/converting-existing-react-app-to-pwa-3c7e4e773db3)), which can be installed natively on mobile and desktop devices.
 
-## Video Walktrough
+## Working Demo 👇
 
 https://user-images.githubusercontent.com/66935206/180422680-f1112889-67e0-459a-bd93-58cad9df4a48.mp4
 
-## Tools used
+## Tools Used
 
 - Axios
 - React 
@@ -19,7 +19,7 @@ https://user-images.githubusercontent.com/66935206/180422680-f1112889-67e0-459a-
 - Bootstrap5
 - Movie-Trailer 
 
-## Steps to Run Project Locally
+## Steps to Run Project Locally 
 
 - Install dependencies: run `npm install` in root project
 - Get API key from [here](https://www.themoviedb.org/documentation/api)
