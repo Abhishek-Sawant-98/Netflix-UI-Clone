@@ -20,7 +20,7 @@ https://user-images.githubusercontent.com/66935206/180422680-f1112889-67e0-459a-
 - [Bootstrap5](https://getbootstrap.com/)
 - [Movie-Trailer](https://www.npmjs.com/package/movie-trailer) 
 
-## Steps to Run Project Locally 
+## Steps to Run Project Locally 💻
 
 - Install dependencies: run `npm install` in root project
 - Get API key from [here](https://www.themoviedb.org/documentation/api)
