@@ -10,6 +10,20 @@
   z-index: 2;
   border-radius: 2px;
   border: 1px solid rgb(61, 61, 61);
+
+  & > div {
+    display: flex;
+    padding: 15px;
+    align-items: center;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    & > * {
+      display: inline-block;
+    }
+  }
 }
 
 #hideDropdown {
@@ -51,20 +65,6 @@
     opacity: 0;
     visibility: hidden;
   }
-}
-
-.account-dropdown > div {
-  display: flex;
-  padding: 15px;
-  align-items: center;
-}
-
-.account-dropdown > div > * {
-  display: inline-block;
-}
-
-.account-dropdown > div:hover {
-  text-decoration: underline;
 }
 
 .bordered {

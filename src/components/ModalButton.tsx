@@ -1,9 +1,13 @@
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 
-const ModalButton = forwardRef(({ targetModal }, ref) => {
+interface Props {
+  targetModal: string;
+}
+
+const ModalButton = forwardRef(({ targetModal }: Props, ref) => {
   return (
     <button
-      ref={ref}
+      ref={ref as React.LegacyRef<HTMLButtonElement>}
       className="visually-hidden"
       aria-label="modalButton"
       data-bs-toggle="modal"

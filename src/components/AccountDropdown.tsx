@@ -1,21 +1,26 @@
-import React from "react";
+interface Props {
+  showDropdown: string;
+  updateShowDropdown: (param: string) => void;
+}
 
-const AccountDropdown = ({ showDropdown, updateShowDropdown }) => {
+const AccountDropdown = ({ showDropdown, updateShowDropdown }: Props) => {
   return (
     <div
       onMouseEnter={() => updateShowDropdown("withoutTransition")}
-      onMouseLeave={() => updateShowDropdown(false)}
+      onMouseLeave={() => updateShowDropdown("false")}
     >
       <nav
         className="account-dropdown  me-lg-4"
         id={`${
-          showDropdown === null
+          showDropdown === "null"
             ? "hideDropdown"
-            : showDropdown === true
+            : showDropdown === "true"
             ? "appear"
             : showDropdown === "withoutTransition"
             ? "appear-without-transition"
-            : "disappear"
+            : showDropdown === "false"
+            ? "disappear"
+            : ""
         }`}
       >
         <i className="bi bi-caret-up-fill"></i>

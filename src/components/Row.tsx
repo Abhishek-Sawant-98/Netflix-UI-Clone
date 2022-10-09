@@ -1,28 +1,32 @@
-import movieTrailer from "movie-trailer";
-import { useState, useEffect, useRef } from "react";
-import {
-  getUpdatedVideoId,
-  isTrailerNotAvailable,
-  throttle,
-} from "../utils/appUtils";
+import React, { useState, useEffect, useRef } from "react";
+import { getUpdatedVideoId, isTrailerNotAvailable } from "../utils/appUtils";
 import api from "../utils/axios";
 import Poster from "./Poster";
-import { useDispatch } from "react-redux";
 import { setMovieName, setTrailerId } from "../store/slices/AppSlice";
 import ModalButton from "./ModalButton";
+import { useAppDispatch } from "../store/StoreHooks";
+import { getVideoId } from "../utils/movieTrailer";
+import { Movie } from "../utils/AppTypes";
 
-const Row = ({ title, fetchUrl, isLargePoster }) => {
-  const dispatch = useDispatch();
-  const btnShowAlert = useRef();
-  const btnShowTrailer = useRef();
-  const [movies, setMovies] = useState([]);
-  const [sliderVisibility, setSliderVisibility] = useState(false);
-  const [scrollX, setScrollX] = useState(0);
-  const [scrollEnd, setScrollEnd] = useState(false);
+interface Props {
+  title: string;
+  fetchUrl: string;
+  isLargePoster: boolean;
+}
 
-  const sliderRef = useRef();
+const Row = ({ title, fetchUrl, isLargePoster }: Props) => {
+  const dispatch = useAppDispatch();
+  const btnShowAlert = useRef<HTMLButtonElement>();
+  const btnShowTrailer = useRef<HTMLButtonElement>();
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [sliderVisibility, setSliderVisibility] = useState<boolean>(false);
+  const [scrollX, setScrollX] = useState<number>(0);
+  const [scrollEnd, setScrollEnd] = useState<boolean>(false);
+
+  const sliderRef = useRef<HTMLDivElement>();
 
   const updateScrollEnd = () => {
+    if (!sliderRef?.current) return;
     if (
       Math.floor(
         sliderRef.current.scrollWidth - sliderRef.current.scrollLeft
@@ -34,9 +38,10 @@ const Row = ({ title, fetchUrl, isLargePoster }) => {
     }
   };
 
-  const shiftSlider = (shift) => {
+  const shiftSlider = (shift: number) => {
     let scrolledDistance = 0;
     const slideVar = setInterval(() => {
+      if (!sliderRef?.current) return;
       sliderRef.current.scrollLeft += shift;
       setScrollX(scrollX + shift);
       updateScrollEnd();
@@ -54,6 +59,7 @@ const Row = ({ title, fetchUrl, isLargePoster }) => {
   const hideSlider = () => setSliderVisibility(false);
 
   const scrollCheck = () => {
+    if (!sliderRef?.current) return;
     setScrollX(sliderRef.current.scrollLeft);
     updateScrollEnd();
   };
@@ -62,7 +68,6 @@ const Row = ({ title, fetchUrl, isLargePoster }) => {
     const {
       data: { results },
     } = await api.get(fetchUrl);
-    // console.log(results);
     setMovies(results);
   };
 
@@ -70,11 +75,30 @@ const Row = ({ title, fetchUrl, isLargePoster }) => {
     fetchMovies();
   }, [fetchUrl]);
 
-  const onImgError = (e) => {
-    e.target.onerror = null;
-    e.target.src = `https://via.placeholder.com/${
-      e.target.height === 250 ? "100x250" : "220x140"
+  const onImgError = (e: MouseEvent) => {
+    if (!e?.target) return;
+    const imgTarget = e.target as HTMLImageElement;
+    imgTarget.onerror = null;
+    imgTarget.src = `https://via.placeholder.com/${
+      imgTarget.height === 250 ? "100x250" : "220x140"
     }`;
+  };
+
+  const onPosterClick: React.MouseEventHandler<HTMLDivElement> = async (e) => {
+    try {
+      const movie = (e.target as HTMLElement)?.dataset?.movieName;
+      if (!movie) return;
+      let videoId = await getVideoId(movie);
+      if (isTrailerNotAvailable(videoId, movie)) {
+        return btnShowAlert?.current?.click();
+      }
+      videoId = getUpdatedVideoId(videoId, movie);
+      dispatch(setTrailerId(videoId));
+      dispatch(setMovieName(movie));
+      btnShowTrailer?.current?.click();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -100,32 +124,14 @@ const Row = ({ title, fetchUrl, isLargePoster }) => {
         )}
         <div
           // Event Delegation
-          onClick={async (e) => {
-            try {
-              const movie = e.target?.dataset?.movieName;
-              if (!movie) return;
-              let videoId = await movieTrailer(movie, {
-                id: true,
-              });
-              if (isTrailerNotAvailable(videoId, movie)) {
-                return btnShowAlert?.current?.click();
-              }
-              videoId = getUpdatedVideoId(videoId, movie);
-              dispatch(setTrailerId(videoId));
-              dispatch(setMovieName(movie));
-              btnShowTrailer?.current?.click();
-            } catch (error) {
-              console.log(error);
-            }
-          }}
+          onClick={onPosterClick}
           className="slider-row"
-          ref={sliderRef}
+          ref={sliderRef as React.LegacyRef<HTMLDivElement>}
           onScroll={scrollCheck}
         >
           {movies.map((movie) => (
             <Poster
               key={movie?.id}
-              sliderRow={sliderRef}
               isLargePoster={isLargePoster}
               movie={movie}
               onImgError={onImgError}

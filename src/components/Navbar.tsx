@@ -4,14 +4,15 @@ import AccountDropdown from "./AccountDropdown";
 import NavMenu from "./NavMenu";
 
 const Navbar = () => {
-  const [showHeaderbg, setShowHeaderbg] = useState(false);
-  const [showAccountDropdown, setShowAccountDropdown] = useState(null);
+  const [showHeaderbg, setShowHeaderbg] = useState<boolean>(false);
+  const [showAccountDropdown, setShowAccountDropdown] =
+    useState<string>("null");
 
-  const menuDropdownIcon = useRef();
+  const menuDropdownIcon = useRef<HTMLElement>();
 
-  const displayAccountDropdown = () => setShowAccountDropdown(true);
-  const hideAccountDropdown = () => setShowAccountDropdown(false);
-  const updateDropdownVisibility = (dropdownVisibility) =>
+  const displayAccountDropdown = () => setShowAccountDropdown("true");
+  const hideAccountDropdown = () => setShowAccountDropdown("false");
+  const updateDropdownVisibility = (dropdownVisibility: string) =>
     setShowAccountDropdown(dropdownVisibility);
 
   useEffect(() => {
@@ -21,11 +22,12 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
+    if (!menuDropdownIcon?.current) return;
     menuDropdownIcon.current.style.transform = `rotateZ(${
-      showAccountDropdown ? "180" : "0"
+      ["null", "false"].includes(showAccountDropdown) ? "0" : "180"
     }deg)`;
     menuDropdownIcon.current.style.transition = `transform 0.2s ease ${
-      !showAccountDropdown ? "0.5s" : ""
+      ["null", "false"].includes(showAccountDropdown) ? "0.5s" : ""
     }`;
   }, [showAccountDropdown]);
 
@@ -58,7 +60,7 @@ const Navbar = () => {
         />
         <i
           className="bi bi-caret-down-fill d-none d-lg-inline-block"
-          ref={menuDropdownIcon}
+          ref={menuDropdownIcon as React.LegacyRef<HTMLElement>}
         ></i>
       </span>
 

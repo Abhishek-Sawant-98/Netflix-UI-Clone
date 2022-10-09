@@ -1,9 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Movie } from "../utils/AppTypes";
 import { IMG_BASE_URL } from "../utils/appUtils";
 
-const Poster = ({ isLargePoster, movie, onImgError }) => {
-  const [fetched, setFetched] = useState(false);
-  const imgRef = useRef();
+interface Props {
+  isLargePoster: boolean;
+  movie: Movie;
+  onImgError: Function;
+}
+
+const Poster = ({ isLargePoster, movie, onImgError }: Props) => {
+  const [fetched, setFetched] = useState<boolean>(false);
+  const imgRef = useRef<HTMLImageElement>();
   const posterClassName = `row__poster ${
     isLargePoster ? "row__largePoster" : ""
   }`;
@@ -37,8 +44,8 @@ const Poster = ({ isLargePoster, movie, onImgError }) => {
             ? movie?.poster_path || movie?.backdrop_path || ""
             : movie?.backdrop_path || movie?.poster_path || ""
         }`}
-        ref={imgRef}
-        onError={onImgError}
+        ref={imgRef as React.LegacyRef<HTMLImageElement>}
+        onError={onImgError as React.ReactEventHandler<HTMLImageElement>}
         alt={""}
       />
     </>

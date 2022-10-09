@@ -1,4 +1,3 @@
-import movieTrailer from "movie-trailer";
 import { useState, useEffect, useRef } from "react";
 import {
   getBannerOverview,
@@ -10,15 +9,17 @@ import {
 } from "../utils/appUtils";
 import api from "../utils/axios";
 import requests from "../utils/requests";
-import { useDispatch } from "react-redux";
 import { setMovieName, setTrailerId } from "../store/slices/AppSlice";
 import ModalButton from "./ModalButton";
+import { getVideoId } from "../utils/movieTrailer";
+import { useAppDispatch } from "../store/StoreHooks";
+import { Movie } from "../utils/AppTypes";
 
 const Banner = () => {
-  const btnShowAlert = useRef();
-  const btnShowTrailer = useRef();
-  const dispatch = useDispatch();
-  const [bannerMovie, setBannerMovie] = useState({});
+  const btnShowAlert = useRef<HTMLButtonElement>();
+  const btnShowTrailer = useRef<HTMLButtonElement>();
+  const dispatch = useAppDispatch();
+  const [bannerMovie, setBannerMovie] = useState<Movie>();
 
   const fetchBannerMovie = async () => {
     const { data } = await api.get(requests[0].url);
@@ -33,11 +34,10 @@ const Banner = () => {
   }, []);
 
   const playBannerMovieTrailer = async () => {
+    if(!bannerMovie) return;
     try {
       const movieName = bannerMovie?.name;
-      let videoId = await movieTrailer(movieName, {
-        id: true,
-      });
+      let videoId = await getVideoId(movieName);
       if (isTrailerNotAvailable(videoId, movieName)) {
         return btnShowAlert?.current?.click();
       }

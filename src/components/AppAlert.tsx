@@ -6,7 +6,7 @@ const AppAlert = () => {
       id="alertModal"
       data-bs-backdrop="static"
       data-bs-keyboard="false"
-      tabIndex="-1"
+      tabIndex={-1}
     >
       <div className="modal-dialog modal-sm modal-dialog-centered">
         <div className="modal-content bg-dark">

@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 const NavMenu = () => {
-  const [showMenu, setShowMenu] = useState(null);
+  const [showMenu, setShowMenu] = useState<string>("null");
   return (
     <>
       {/* div to be hovered for displaying dropdown menu */}
       <div
         className="menu-collapsed d-block d-lg-none"
-        onMouseEnter={() => setShowMenu(true)}
-        onMouseLeave={() => setShowMenu(false)}
+        onMouseEnter={() => setShowMenu("true")}
+        onMouseLeave={() => setShowMenu("false")}
       >
         <span className="browse">Browse</span>
         <i className="bi bi-caret-down-fill"></i>
@@ -18,11 +18,11 @@ const NavMenu = () => {
       <nav
         className="menu-dropdown"
         onMouseEnter={() => setShowMenu("withoutTransition")}
-        onMouseLeave={() => setShowMenu(false)}
+        onMouseLeave={() => setShowMenu("false")}
         id={`${
-          showMenu === null
+          showMenu === "null"
             ? "hideDropdown"
-            : showMenu === true
+            : showMenu === "true"
             ? "appear"
             : showMenu === "withoutTransition"
             ? "appear-without-transition"

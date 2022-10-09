@@ -1,15 +1,14 @@
-import React from "react";
 import YouTube from "react-youtube";
-import { useSelector, useDispatch } from "react-redux";
 import {
   selectAppState,
   setMovieName,
   setTrailerId,
 } from "../store/slices/AppSlice";
+import { useAppDispatch, useAppSelector } from "../store/StoreHooks";
 
 const TrailerModal = () => {
-  const { movieName, trailerId } = useSelector(selectAppState);
-  const dispatch = useDispatch();
+  const { movieName, trailerId } = useAppSelector(selectAppState);
+  const dispatch = useAppDispatch();
 
   const opts = {
     height: "400",
@@ -30,7 +29,7 @@ const TrailerModal = () => {
       id="trailerModal"
       data-bs-backdrop="static"
       data-bs-keyboard="false"
-      tabIndex="-1"
+      tabIndex={-1}
     >
       <div className="modal-dialog modal-xl modal-dialog-centered">
         <div className="modal-content bg-dark">

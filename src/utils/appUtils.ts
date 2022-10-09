@@ -1,11 +1,14 @@
 // Optimization method to cache and retrieve the results
-// of pure functions, instead of recalculating again
-export const memoize = (func) => {
-  const cachedResults = {};
 
-  return (...args) => {
+import { Movie } from "./AppTypes";
+
+// of pure functions, instead of recalculating again
+export const memoize = (func: Function): Function => {
+  const cachedResults: any = {};
+
+  return (...args: any[]) => {
     // To generate a unique key for each input args array
-    const argsKey = JSON.stringify(...args);
+    const argsKey = JSON.stringify(args);
 
     // For the 1st time, calculate and cache the new result
     if (!cachedResults[argsKey]) {
@@ -17,11 +20,12 @@ export const memoize = (func) => {
 };
 
 // Convert a normal function to a 'throttled' function
-export const throttle = (func, interval = 500) => {
-  let inThrottle;
-  return function (...args) {
+export const throttle = (func: Function, interval: number = 500): Function => {
+  let inThrottle: boolean;
+  let context = this;
+  return function (...args: any[]) {
     if (!inThrottle) {
-      func.apply(this, args);
+      func.apply(context, args);
       // To PREVENT control to reach inside this if block
       // for 'interval' ms
       inThrottle = true;
@@ -34,7 +38,7 @@ export const throttle = (func, interval = 500) => {
   };
 };
 
-export const truncateString = (str, maxLength) => {
+export const truncateString = (str: string, maxLength: number): string => {
   if (!str || !str.length || str === "undefined") return "Loading...";
   return str.length > maxLength ? str.substring(0, maxLength) + "..." : str;
 };
@@ -42,10 +46,13 @@ export const truncateString = (str, maxLength) => {
 // Memoizing the below methods as they are called with the same
 // argument more than once
 export const getBannerTitle = memoize(
-  (movie) => movie?.name || movie?.title || movie?.original_name
+  (movie: Movie) => movie?.name || movie?.title || movie?.original_name
 );
 
-export const isTrailerNotAvailable = (videoId, movieName) => {
+export const isTrailerNotAvailable = (
+  videoId: string,
+  movieName: string
+): boolean => {
   return (
     !videoId &&
     !/^(Sex Education|Money Heist|The Naked Director|Squid Game|All of Us Are Dead|Boo, Bitch|Man Vs Bee|Money Heist: Korea - Joint Economic Area|The Umbrella Academy)$/.test(
@@ -54,7 +61,10 @@ export const isTrailerNotAvailable = (videoId, movieName) => {
   );
 };
 
-export const getUpdatedVideoId = (videoId, movieName) => {
+export const getUpdatedVideoId = (
+  videoId: string,
+  movieName: string
+): string => {
   return movieName === "Parasite"
     ? "isOGD_7hNIY"
     : movieName === "Lucifer"
@@ -80,12 +90,8 @@ export const getUpdatedVideoId = (videoId, movieName) => {
     : videoId;
 };
 
-export const getBannerOverview = memoize((movie) => movie?.overview);
+export const getBannerOverview = memoize((movie: Movie) => movie?.overview);
 
-export const IMG_BASE_URL = "https://image.tmdb.org/t/p/original";
-
-export const NETFLIX_LOGO =
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/799px-Netflix_2015_logo.svg.png?20190206123158";
-
-export const USER_AVATAR =
-  "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png?20201013161117";
+export const IMG_BASE_URL = process.env.REACT_APP_IMG_BASE_URL;
+export const NETFLIX_LOGO = process.env.REACT_APP_NETFLIX_LOGO;
+export const USER_AVATAR = process.env.REACT_APP_USER_AVATAR;
