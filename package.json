@@ -17,7 +17,7 @@
     "react-youtube": "^9.0.3"
   },
   "scripts": {
-    "build": "vite build",
+    "build": "vite build --mode production",
     "lint": "yarn eslint src/",
     "dev": "vite --open",
     "preview": "vite preview"
