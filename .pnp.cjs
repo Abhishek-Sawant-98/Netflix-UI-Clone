@@ -32,6 +32,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@html-eslint/parser", "npm:0.19.1"],\
             ["@reduxjs/toolkit", "virtual:47b353fc864cbd0709d50ea4be4d1c2961b13e4dbaa276accc51c5a1aaec41819593a47cd7e427101932225c7b12bb5f9e051d912d4928b72b4b956cbc0799d5#npm:1.8.3"],\
             ["@types/react", "npm:18.3.3"],\
+            ["@types/react-dom", "npm:18.3.0"],\
             ["@vitejs/plugin-react", "virtual:47b353fc864cbd0709d50ea4be4d1c2961b13e4dbaa276accc51c5a1aaec41819593a47cd7e427101932225c7b12bb5f9e051d912d4928b72b4b956cbc0799d5#npm:4.3.1"],\
             ["axios", "npm:0.26.1"],\
             ["eslint", "npm:8.57.0"],\
@@ -3514,6 +3515,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.3.3"],\
             ["@types/prop-types", "npm:15.7.5"],\
             ["csstype", "npm:3.0.11"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/react-dom", [\
+        ["npm:18.3.0", {\
+          "packageLocation": "./.yarn/cache/@types-react-dom-npm-18.3.0-111444d3eb-a0cd9b1b81.zip/node_modules/@types/react-dom/",\
+          "packageDependencies": [\
+            ["@types/react-dom", "npm:18.3.0"],\
+            ["@types/react", "npm:18.3.3"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -10282,6 +10293,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@html-eslint/parser", "npm:0.19.1"],\
             ["@reduxjs/toolkit", "virtual:47b353fc864cbd0709d50ea4be4d1c2961b13e4dbaa276accc51c5a1aaec41819593a47cd7e427101932225c7b12bb5f9e051d912d4928b72b4b956cbc0799d5#npm:1.8.3"],\
             ["@types/react", "npm:18.3.3"],\
+            ["@types/react-dom", "npm:18.3.0"],\
             ["@vitejs/plugin-react", "virtual:47b353fc864cbd0709d50ea4be4d1c2961b13e4dbaa276accc51c5a1aaec41819593a47cd7e427101932225c7b12bb5f9e051d912d4928b72b4b956cbc0799d5#npm:4.3.1"],\
             ["axios", "npm:0.26.1"],\
             ["eslint", "npm:8.57.0"],\
@@ -11464,7 +11476,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/runtime", "npm:7.17.9"],\
             ["@types/hoist-non-react-statics", "npm:3.3.1"],\
             ["@types/react", "npm:18.3.3"],\
-            ["@types/react-dom", null],\
+            ["@types/react-dom", "npm:18.3.0"],\
             ["@types/react-native", null],\
             ["@types/redux", null],\
             ["@types/use-sync-external-store", "npm:0.0.3"],\

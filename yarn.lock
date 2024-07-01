@@ -2205,6 +2205,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-dom@npm:^18.3.0":
+  version: 18.3.0
+  resolution: "@types/react-dom@npm:18.3.0"
+  dependencies:
+    "@types/react": "*"
+  checksum: a0cd9b1b815a6abd2a367a9eabdd8df8dd8f13f95897b2f9e1359ea3ac6619f957c1432ece004af7d95e2a7caddbba19faa045f831f32d6263483fc5404a7596
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:*, @types/react@npm:^18.3.3":
   version: 18.3.3
   resolution: "@types/react@npm:18.3.3"
@@ -7926,6 +7935,7 @@ eslint-config-airbnb@latest:
     "@html-eslint/parser": ^0.19.1
     "@reduxjs/toolkit": ^1.8.3
     "@types/react": ^18.3.3
+    "@types/react-dom": ^18.3.0
     "@vitejs/plugin-react": ^4.1.1
     axios: ^0.26.1
     eslint: ^8.51.0
