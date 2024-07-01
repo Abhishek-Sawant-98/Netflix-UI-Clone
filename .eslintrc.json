@@ -1,0 +1,49 @@
+{{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb",
+        "plugin:jsdoc/recommended"
+    ],
+    "overrides": [{
+        "files": ["*.html"],
+        "parser": "@html-eslint/parser",
+        "extends": ["plugin:@html-eslint/recommended"]
+      }
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "plugins": [
+        "react",
+        "jsdoc",
+        "@html-eslint"
+    ],
+    "rules": {
+        "array-bracket-spacing": ["error", "always"],
+        "computed-property-spacing": ["error", "always"],
+        "indent": [2, "tab", { "SwitchCase": 1, "VariableDeclarator": 1 }],
+        "import/prefer-default-export": 0,
+        "linebreak-style": 0, // migrate to .js and see https://stackoverflow.com/q/39114446/2771889
+        "no-tabs": ["error", { "allowIndentationTabs": true }],
+        "object-curly-spacing": ["error", "always"],
+        "one-var": ["error", "consecutive"],
+        "no-nested-ternary" : 0,
+        "no-plusplus": 0,
+        "react/prop-types": 0,
+        "react/jsx-curly-spacing": [2, {"when": "always", "allowMultiline": false}],
+        "react/jsx-closing-bracket-location": [1, { "selfClosing": "tag-aligned", "nonEmpty": "after-props"}],
+        "react/jsx-filename-extension": [1,  { "extensions": [".js", ".jsx"] }],
+        "react/forbid-prop-types": 0, // disabling allows object prop types
+        "react/jsx-indent": [2, "tab"],
+        "react/jsx-indent-props": [2, "tab"],
+        "react/jsx-props-no-spreading": 0, // this would be good to turn on but needs rewrites
+        "space-in-parens": ["error", "always"],
+        "react/jsx-no-duplicate-props": ["error", { "ignoreCase": false }] //airBnB config defaults to ignoreCase: true
+    }
+}
+}

@@ -92,6 +92,6 @@ export const getUpdatedVideoId = (
 
 export const getBannerOverview = memoize((movie: Movie) => movie?.overview);
 
-export const IMG_BASE_URL = process.env.REACT_APP_IMG_BASE_URL;
-export const NETFLIX_LOGO = process.env.REACT_APP_NETFLIX_LOGO;
-export const USER_AVATAR = process.env.REACT_APP_USER_AVATAR;
+export const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
+export const NETFLIX_LOGO = import.meta.env.VITE_NETFLIX_LOGO;
+export const USER_AVATAR = import.meta.env.VITE_USER_AVATAR;
