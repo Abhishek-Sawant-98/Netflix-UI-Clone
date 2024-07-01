@@ -1,4 +1,4 @@
-{{
+{
     "env": {
         "browser": true,
         "commonjs": true,
@@ -13,8 +13,7 @@
         "files": ["*.html"],
         "parser": "@html-eslint/parser",
         "extends": ["plugin:@html-eslint/recommended"]
-      }
-    ],
+    }],
     "parserOptions": {
         "ecmaVersion": "latest"
     },
@@ -45,5 +44,4 @@
         "space-in-parens": ["error", "always"],
         "react/jsx-no-duplicate-props": ["error", { "ignoreCase": false }] //airBnB config defaults to ignoreCase: true
     }
-}
 }
