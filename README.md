@@ -22,11 +22,11 @@ https://user-images.githubusercontent.com/66935206/180422680-f1112889-67e0-459a-
 
 ## Steps to Run Project Locally 💻
 
-- Install dependencies: run `npm install` in root project
+- Install dependencies: run `yarn install` in root project
 - Get API key from [here](https://www.themoviedb.org/documentation/api)
 - Create **.env** file in root project and add: `VITE_TMDB_API_KEY=YOUR_API_KEY_HERE`
-- Run project in development mode: `npm start`
-- Build project for production: `npm run build`
+- Run project in development mode: `yarn dev`
+- Build project for production: `yarn build`
 
 ## User Stories
 
