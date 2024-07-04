@@ -1,7 +1,7 @@
 import AppReducer from "./slices/AppSlice";
 
 const rootReducer = {
-  AppData: AppReducer,
+    AppData: AppReducer,
 };
 
 export default rootReducer;
