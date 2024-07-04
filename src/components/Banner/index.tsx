@@ -1,17 +1,10 @@
-import { useState, useEffect, useRef } from "react";
-import {
-    getBannerOverview,
-    getBannerTitle,
-    getUpdatedVideoId,
-    VITE_IMG_BASE_URL,
-    isTrailerNotAvailable,
-    truncateString,
-} from "../../utility/app";
+import { useState, useEffect, useRef, useMemo } from "react";
+import { VITE_IMG_BASE_URL, truncateString } from "../../utility/app";
 import api from "../../config/axios";
 import requests from "../../config/requests";
 import { setMovieName, setTrailerId } from "../../redux/slices/AppSlice";
 import ModalButton from "../ModalButton";
-import { getVideoId } from "../../utility/movieTrailer";
+import { getVideoIdFromMovie } from "../../utility/movieTrailer";
 import { useAppDispatch } from "../../redux/hooks";
 import { Movie } from "../../config/AppTypes";
 import './index.scss';
@@ -21,9 +14,21 @@ const Banner = () => {
     const btnShowTrailer = useRef<HTMLButtonElement>();
     const dispatch = useAppDispatch();
     const [bannerMovie, setBannerMovie] = useState<Movie>();
+    const bannerTitle = useMemo(() => {
+        let bTitle = "";
+        if( bannerMovie ) {
+            const { name, title, original_name } = bannerMovie;
+            bTitle = name ?? title ?? original_name ?? "";
+        }
+        return bTitle;
+    }, [bannerMovie]);
+
+    const bannerOverview = useMemo(() => {
+        return bannerMovie ? bannerMovie.overview : "";
+    }, [bannerMovie])
 
     const fetchBannerMovie = async () => {
-        const [ bannerMovie ] = requests;
+        const [bannerMovie] = requests;
         const { data } = await api.get(bannerMovie.url);
         const movies = data.results;
 
@@ -38,15 +43,15 @@ const Banner = () => {
     const playBannerMovieTrailer = async () => {
         if (!bannerMovie) return;
         try {
-            const movieName = bannerMovie?.name;
-            let videoId = await getVideoId(movieName);
-            if (isTrailerNotAvailable(videoId, movieName)) {
-                return btnShowAlert?.current?.click();
+            const movieName = bannerMovie.name;
+            const videoId = await getVideoIdFromMovie(movieName);
+            if (videoId) {
+                dispatch(setTrailerId(videoId));
+                dispatch(setMovieName(movieName));
+                btnShowTrailer.current?.click();
+            } else {
+                btnShowAlert.current?.click();
             }
-            videoId = getUpdatedVideoId(videoId, movieName);
-            dispatch(setTrailerId(videoId));
-            dispatch(setMovieName(movieName));
-            btnShowTrailer?.current?.click();
         } catch (error) {
             console.log(error);
         }
@@ -55,17 +60,18 @@ const Banner = () => {
     return (
         <section
             className="banner"
-            style={{
-                backgroundImage: `url(${VITE_IMG_BASE_URL}/${bannerMovie?.backdrop_path || ""
-                    })`,
-            }}
+            style={
+                {
+                    backgroundImage: `url(${VITE_IMG_BASE_URL}${bannerMovie?.backdrop_path || ""})`
+                }
+            }
         >
             <div className="banner__contents">
-                <h1 className="banner__title" title={getBannerTitle(bannerMovie)}>
-                    {truncateString(getBannerTitle(bannerMovie), 25)}
+                <h1 className="banner__title" title={bannerTitle}>
+                    {truncateString(bannerTitle, 25)}
                 </h1>
-                <p className="overview" title={getBannerOverview(bannerMovie)}>
-                    {truncateString(getBannerOverview(bannerMovie), 130)}
+                <p className="overview" title={bannerOverview}>
+                    {truncateString(bannerOverview, 130)}
                 </p>
                 <div className="banner__buttons">
                     <button
