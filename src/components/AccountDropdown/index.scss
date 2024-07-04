@@ -1,0 +1,106 @@
+.account-dropdown {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.9);
+    font-size: 13px;
+    cursor: pointer;
+    width: 170px;
+    position: absolute;
+    top: 70px;
+    right: 25px;
+    z-index: 2;
+    border-radius: 2px;
+    border: 1px solid rgb(61, 61, 61);
+
+    &>div {
+        display: flex;
+        padding: 15px;
+        align-items: center;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &>* {
+            display: inline-block;
+        }
+    }
+}
+
+#hideDropdown {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#appear {
+    animation: fadeIn 0.2s;
+}
+
+#appear-without-transition {
+    opacity: 1;
+}
+
+#disappear {
+    /* `fill-mode: forwards`, to prevent fadeIn after fadeOut */
+    animation: fadeOut 0.2s forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.bordered {
+    border-style: solid;
+    border-color: rgb(61, 61, 61);
+}
+
+.top-bottom-border {
+    border-width: 1px 0 1px 0;
+}
+
+.top-border {
+    border-width: 1px 0 0 0;
+}
+
+#img_kids {
+    width: 30px;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-left: -5px;
+    z-index: 3;
+}
+
+.menu-icon {
+    font-size: 20px;
+    color: rgb(182, 182, 182);
+    margin-right: 15px;
+}
+
+.bi-caret-up-fill {
+    position: absolute;
+    color: #fff;
+    font-size: 18px;
+    top: -22px;
+    left: 142px;
+    transform: rotateX(45deg);
+}
