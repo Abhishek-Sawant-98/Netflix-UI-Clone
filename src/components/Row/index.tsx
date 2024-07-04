@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getUpdatedVideoId, isTrailerNotAvailable } from "../../utility/app";
 import api from "../../config/axios";
 import Poster from "../Poster";
 import { setMovieName, setTrailerId } from "../../redux/slices/AppSlice";
 import ModalButton from "../ModalButton";
 import { useAppDispatch } from "../../redux/hooks";
-import { getVideoId } from "../../utility/movieTrailer";
+import { getVideoIdFromMovie } from "../../utility/movieTrailer";
 import { Movie } from "../../config/AppTypes";
 import './index.scss';
+import { NETFLIX_ORIGINALS, videoIds } from "../../config/movies";
 
 interface Props {
     title: string;
@@ -17,8 +17,8 @@ interface Props {
 
 const Row = ({ title, fetchUrl, isLargePoster }: Props) => {
     const dispatch = useAppDispatch();
-    const btnShowAlert = useRef<HTMLButtonElement>();
-    const btnShowTrailer = useRef<HTMLButtonElement>();
+    const btnShowAlert = useRef<HTMLButtonElement>(null);
+    const btnShowTrailer = useRef<HTMLButtonElement>(null);
     const [movies, setMovies] = useState<Movie[]>([]);
     const [sliderVisibility, setSliderVisibility] = useState<boolean>(false);
     const [scrollX, setScrollX] = useState<number>(0);
@@ -86,16 +86,17 @@ const Row = ({ title, fetchUrl, isLargePoster }: Props) => {
 
     const onPosterClick: React.MouseEventHandler<HTMLDivElement> = async (e) => {
         try {
-            const movie = (e.target as HTMLElement)?.dataset?.movieName;
-            if (!movie) return;
-            let videoId = await getVideoId(movie);
-            if (isTrailerNotAvailable(videoId, movie)) {
-                return btnShowAlert?.current?.click();
+            const movie = (e.target as HTMLElement).dataset.movieName;
+            if (movie) {
+                const videoId = await getVideoIdFromMovie(movie);
+                if (videoId) {
+                    dispatch(setTrailerId(videoId));
+                    dispatch(setMovieName(movie));
+                    btnShowTrailer.current?.click();
+                } else {
+                    btnShowAlert.current?.click();
+                }
             }
-            videoId = getUpdatedVideoId(videoId, movie);
-            dispatch(setTrailerId(videoId));
-            dispatch(setMovieName(movie));
-            btnShowTrailer?.current?.click();
         } catch (error) {
             console.log(error);
         }
@@ -106,7 +107,7 @@ const Row = ({ title, fetchUrl, isLargePoster }: Props) => {
             <h2
                 className="row__title"
                 style={{
-                    marginBottom: `${title === "NETFLIX ORIGINALS" ? "-30px" : "-5px"}`,
+                    marginBottom: `${title === NETFLIX_ORIGINALS ? "-30px" : "-5px"}`,
                 }}
             >
                 {title}
