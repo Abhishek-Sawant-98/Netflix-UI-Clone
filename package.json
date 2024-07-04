@@ -5,7 +5,7 @@
   "engines": {
     "node": "18.20.3",
     "npm": "10.7.0",
-    "yarn": "3.3.1"
+        "yarn": "4.0.2"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
@@ -22,7 +22,7 @@
     "dev": "vite --open",
     "preview": "vite preview"
   },
-  "packageManager": "yarn@3.3.1",
+    "packageManager": "yarn@4.0.2",
   "devDependencies": {
     "@html-eslint/eslint-plugin": "^0.19.1",
     "@html-eslint/parser": "^0.19.1",
