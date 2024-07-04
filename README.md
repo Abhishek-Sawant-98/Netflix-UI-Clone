@@ -2,7 +2,7 @@
 
 This is a very basic UI clone of the NETFLIX web app using `React` and [The MovieDB API](https://www.themoviedb.org/documentation/api). 
 
-> Deployed App 👉 <https://abhishek-netflix-clone.surge.sh/> 🚀
+> Deployed App 👉 <https://abhishek-netflix-clone.vercel.app/> 🚀
 
 🔥 This is a **PWA** ([`Progressive Web App`](https://medium.com/swlh/converting-existing-react-app-to-pwa-3c7e4e773db3)), which can be installed natively on mobile and desktop devices.
 
