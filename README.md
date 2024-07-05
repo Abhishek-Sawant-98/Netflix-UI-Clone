@@ -9,7 +9,6 @@ This is a very basic UI clone of the NETFLIX web app using `React` and [The Movi
 ## Working Demo 👇
 
 https://user-images.githubusercontent.com/66935206/180422680-f1112889-67e0-459a-bd93-58cad9df4a48.mp4
-> At first, all images won't load due to [`Too many requests error`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429). To fix this, keep refreshing the app till all the placeholder images disappear.
 
 ## Tools Used 🛠️
 
